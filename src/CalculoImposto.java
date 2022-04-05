@@ -2,53 +2,51 @@ import java.util.Scanner;
 
 public class CalculoImposto {
     public static void main(String[] args) {
-        System.out.println("\n\nBem vindo a SimCity:");
-        System.out.println("Este é nosso sistema de cálculo de impostos para o presente ano.");
-        System.out.println("Por gentileza, cadastre os salários do ano:");
         Scanner leitor = new Scanner(System.in);
-
-        double[] salariosDoAno = new double[12];
-        for (int i = 0; i < salariosDoAno.length; i++) {
-            System.out.println("Digite o valor do " + (i + 1) + "º salário:");
-            salariosDoAno[i] = leitor.nextDouble();
-        }
-
+        
+        System.out.println("\n\nBem vindo a SimCity!");
+        System.out.println("Este é nosso sistema de cálculo de impostos para o presente ano.");
+        
+        double[] salarios = cadastrarSalarios(12);
+        double[] impostosCalculados = calcularImposto(salarios);
         String[] dadosUsuario = new String[2];
-        leitor.nextLine();
+
 
         while (true) {
             System.out.println("\n\nPara mostrar o menu, digite [menu]:");
             String opcao = leitor.nextLine();
 
             if (opcao.equals("menu")) {
-                System.out.println("\n\nMenu:");
-                System.out.println("Para cadastrar seus dados, digite [c]:");
-                System.out.println("Para mostrar seus dados cadastrais, digite [m]:");
-                System.out.println("Para mostrar os salários cadastrados, digite [s]:");
-                System.out.println("Para calcular o imposto de cada mês, digite [i]:");
-                System.out.println("Para sair do sistema, digite [sair]:");
+                mostrarMenu();
             } else if (opcao.equals("c")) {
-                dadosUsuario = cadastro();
+                dadosUsuario = cadastrarUsuario();
             } else if (opcao.equals("m")) {
                 mostrarDadosCadastrais(dadosUsuario);
             } else if (opcao.equals("s")) {
-                mostrarSalarios(salariosDoAno);
+                mostrarSalarios(salarios);
             } else if (opcao.equals("i")) {
-                double[] impostosCalculados = new double[salariosDoAno.length];
-                impostosCalculados = calculaImposto(salariosDoAno);
-
                 mostrarImpostos(impostosCalculados);
             } else if (opcao.equals("sair")) {
-                leitor.close();
                 System.exit(0);
             } else {
                 System.out.println("Opção inválida.");
             }
-            opcao = "";
         }
     }
 
-    public static double[] calculaImposto(double[] salarios) {
+    public static double[] cadastrarSalarios(int meses) {
+        System.out.println("Por gentileza, cadastre os salários do ano:");
+        Scanner leitor = new Scanner(System.in);
+
+        double[] salariosDoAno = new double[meses];
+        for (int i = 0; i < salariosDoAno.length; i++) {
+            System.out.println("Digite o valor do " + (i + 1) + "º salário:");
+            salariosDoAno[i] = leitor.nextDouble();
+        }  
+        return salariosDoAno;
+    }
+
+    public static double[] calcularImposto(double[] salarios) {
         double[] imposto = new double[salarios.length];
         for (int i = 0; i < salarios.length; i++) {
             if (salarios[i] <= 2000.00) {
@@ -64,14 +62,14 @@ public class CalculoImposto {
         return imposto;
     }
 
-    public static String[] cadastro() {
-        Scanner scanner = new Scanner(System.in);
+    public static String[] cadastrarUsuario() {
+        Scanner leitor = new Scanner(System.in);
         System.out.println("Digite seu nome:");
         String[] dados = new String[2];
-        dados[0] = scanner.nextLine();
+        dados[0] = leitor.nextLine();
 
         System.out.println("Digite sua profissão:");
-        dados[1] = scanner.nextLine();
+        dados[1] = leitor.nextLine();
         return dados;
     }
 
@@ -96,7 +94,7 @@ public class CalculoImposto {
     }
 
     public static void mostrarDadosCadastrais(String[] dados) {
-        if (dados[0] != null && dados[1] != null) {
+        if (dados[0] != null || dados[1] != null) {
 
             System.out.println("Nome: " + dados[0]);
             System.out.println("Profissão: " + dados[1]);
@@ -105,6 +103,14 @@ public class CalculoImposto {
             System.out.println("------ATENÇÃO------");
             System.out.println("Cadastre todos os dados primeiro usando a opção [c].\n");
         }
+    }
 
+    public static void mostrarMenu(){
+        System.out.println("\n\nMenu:");
+        System.out.println("Para cadastrar seus dados, digite [c]:");
+        System.out.println("Para mostrar seus dados cadastrais, digite [m]:");
+        System.out.println("Para mostrar os salários cadastrados, digite [s]:");
+        System.out.println("Para calcular o imposto de cada mês, digite [i]:");
+        System.out.println("Para sair do sistema, digite [sair]:");
     }
 }
