@@ -18,7 +18,7 @@ public class CalculoImposto {
 
             if (opcao.equals("menu")) {
                 mostrarMenu();
-                
+
             } else if (opcao.equals("c")) {
                 dadosUsuario = cadastrarUsuario();
 
@@ -87,14 +87,16 @@ public class CalculoImposto {
         return dados;
     }
 
-    public static void mostrarImpostos(double[] vetorImpostos) {
-        System.out.println("------Impostos por mês------\n");
-        for (int i = 0; i < vetorImpostos.length; i++) {
-            System.out.print("mês " + (i + 1) + ": ");
-            System.out.printf("%.2f", vetorImpostos[i]);
+    public static void mostrarDadosCadastrais(String[] dados) {
+        if (dados[0] != null && dados[1] != null) {
+            System.out.println("Nome: " + dados[0]);
+            System.out.println("Profissão: " + dados[1]);
             System.out.println();
+
+        } else {
+            System.out.println("------ATENÇÃO------");
+            System.out.println("Cadastre todos os dados primeiro usando a opção [c].\n");
         }
-        System.out.println();
     }
 
     public static void mostrarSalarios(double[] vetorSalarios) {
@@ -107,15 +109,13 @@ public class CalculoImposto {
         System.out.println();
     }
 
-    public static void mostrarDadosCadastrais(String[] dados) {
-        if (dados[0] != null || dados[1] != null) {
-
-            System.out.println("Nome: " + dados[0]);
-            System.out.println("Profissão: " + dados[1]);
+    public static void mostrarImpostos(double[] vetorImpostos) {
+        System.out.println("------Impostos por mês------\n");
+        for (int i = 0; i < vetorImpostos.length; i++) {
+            System.out.print("mês " + (i + 1) + ": ");
+            System.out.printf("%.2f", vetorImpostos[i]);
             System.out.println();
-        } else {
-            System.out.println("------ATENÇÃO------");
-            System.out.println("Cadastre todos os dados primeiro usando a opção [c].\n");
         }
+        System.out.println();
     }
 }
