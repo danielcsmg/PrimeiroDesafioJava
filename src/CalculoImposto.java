@@ -18,14 +18,19 @@ public class CalculoImposto {
 
             if (opcao.equals("menu")) {
                 mostrarMenu();
+                
             } else if (opcao.equals("c")) {
                 dadosUsuario = cadastrarUsuario();
+
             } else if (opcao.equals("m")) {
                 mostrarDadosCadastrais(dadosUsuario);
+
             } else if (opcao.equals("s")) {
                 mostrarSalarios(salarios);
+
             } else if (opcao.equals("i")) {
                 mostrarImpostos(impostosCalculados);
+
             } else if (opcao.equals("sair")) {
                 System.exit(0);
             } else {
@@ -60,6 +65,15 @@ public class CalculoImposto {
             }
         }
         return imposto;
+    }
+
+    public static void mostrarMenu(){
+        System.out.println("\n\nMenu:");
+        System.out.println("Para cadastrar seus dados, digite [c]:");
+        System.out.println("Para mostrar seus dados cadastrais, digite [m]:");
+        System.out.println("Para mostrar os salários cadastrados, digite [s]:");
+        System.out.println("Para calcular o imposto de cada mês, digite [i]:");
+        System.out.println("Para sair do sistema, digite [sair]:");
     }
 
     public static String[] cadastrarUsuario() {
@@ -103,14 +117,5 @@ public class CalculoImposto {
             System.out.println("------ATENÇÃO------");
             System.out.println("Cadastre todos os dados primeiro usando a opção [c].\n");
         }
-    }
-
-    public static void mostrarMenu(){
-        System.out.println("\n\nMenu:");
-        System.out.println("Para cadastrar seus dados, digite [c]:");
-        System.out.println("Para mostrar seus dados cadastrais, digite [m]:");
-        System.out.println("Para mostrar os salários cadastrados, digite [s]:");
-        System.out.println("Para calcular o imposto de cada mês, digite [i]:");
-        System.out.println("Para sair do sistema, digite [sair]:");
     }
 }
